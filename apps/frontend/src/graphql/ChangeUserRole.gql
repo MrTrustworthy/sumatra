@@ -1,0 +1,6 @@
+mutation ChangeUserRole($userId: String!, $role: String!) {
+    changeUserRole(id: $userId, role: $role) {
+        id
+        organizationRole
+    }
+}
