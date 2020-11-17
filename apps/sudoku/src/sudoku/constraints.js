@@ -33,6 +33,10 @@ class ConstraintGroup {
         this.fields = fields;
         this.constraints = constraints;
     }
+
+    hasPosition(position) {
+        return this.fields.filter(f => f.position.equals(position)).length > 0;
+    }
 }
 
-module.exports = {EVALUATION_RESULT, Constraint, MustContainOnceConstraint};
+module.exports = {EVALUATION_RESULT, Constraint, MustContainOnceConstraint, ConstraintGroup};

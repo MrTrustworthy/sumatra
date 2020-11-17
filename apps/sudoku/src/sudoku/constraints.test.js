@@ -1,5 +1,5 @@
 const {Field} = require("./fields");
-const {MustContainOnceConstraint, EVALUATION_RESULT} = require("./constraints");
+const {MustContainOnceConstraint, EVALUATION_RESULT, ConstraintGroup} = require("./constraints");
 
 describe('Correct validation of MustContainConstraint', () => {
     it.each`
@@ -19,4 +19,15 @@ describe('Correct validation of MustContainConstraint', () => {
             const constraint = new MustContainOnceConstraint(constraintNumbers);
             expect(constraint.validate(fields)).toBe(result);
         });
+});
+
+
+test("ConstraintGroup reliably detects fields via position", () => {
+    const field1 = new Field(0, 0);
+    const field2 = new Field(1, 0);
+    const constraintGroup = new ConstraintGroup([field1], []);
+
+    expect(constraintGroup.hasPosition(field1.position)).toBeTruthy();
+    expect(constraintGroup.hasPosition(field2.position)).toBeFalsy();
+
 });
