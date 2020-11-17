@@ -1,20 +1,11 @@
 const {Field, POSSIBLE} = require("./fields");
 const {MustContainOnceConstraint, ConstraintGroup} = require("./constraints");
 
-class Sudoku {
-    constructor(fields, constraintGroups) {
-        this.fields = fields;
-        this.constraintGroups = constraintGroups;
-    }
-}
-
 const FIELDS_FROM_STRING = string => {
     return Array.from(string).map(
         (character, idx) => new Field(idx, parseInt(character, 10))
     );
 };
-
-const idxToPosition = (idx) => idx;
 
 const CREATE_DEFAULT_CONSTRAINT_GROUPS = fields => {
     const onceConstraint = new MustContainOnceConstraint(POSSIBLE);
@@ -40,5 +31,31 @@ const CREATE_DEFAULT_CONSTRAINT_GROUPS = fields => {
     return fieldGroups.map(fields => new ConstraintGroup(fields, [onceConstraint]));
 };
 
+class Sudoku {
+    constructor(fields, constraintGroups) {
+        this.fields = fields;
+        this.constraintGroups = constraintGroups;
+    }
 
-module.exports = {FIELDS_FROM_STRING, CREATE_DEFAULT_CONSTRAINT_GROUPS};
+    static fromString(string) {
+        const fields = FIELDS_FROM_STRING(string);
+        const constraintGroups = CREATE_DEFAULT_CONSTRAINT_GROUPS(fields);
+        return new Sudoku(fields, constraintGroups);
+    }
+
+    isValid() {
+        return this.constraintGroups.every(cg => cg.isValid());
+    }
+
+    isFilled() {
+        return this.fields.every(f => f.number !== undefined);
+    }
+
+    isCompleted() {
+        return this.isFilled() && this.isValid();
+    }
+
+}
+
+
+module.exports = {Sudoku, FIELDS_FROM_STRING, CREATE_DEFAULT_CONSTRAINT_GROUPS};
