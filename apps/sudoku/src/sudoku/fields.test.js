@@ -11,6 +11,13 @@ test("Field constructor recognizes solved status", () => {
     expect((new Field(1, 2)).number).toBe(2);
 });
 
+test("Field constructor correctly deals with 0-data", () => {
+    const field = new Field(1, 0);
+        expect(field.number).toBe(undefined);
+
+    expect(field.status).toBe(FIELD_STATI.UNSOLVED);
+    expect(field.isGiven).toBe(false);
+});
 
 test("Field doesn't accept changed numbers", () => {
     const field = new Field(1, 2);

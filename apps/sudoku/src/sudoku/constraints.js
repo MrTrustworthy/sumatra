@@ -24,7 +24,6 @@ class MustContainOnceConstraint extends Constraint {
         if (fieldNumbers.length !== fieldNumberSet.size) return EVALUATION_RESULT.INVALID;
         // numbers outside of constraint are invalid
         if (!isSuperset(this.numbers, fieldNumberSet)) return EVALUATION_RESULT.INVALID;
-
         return EVALUATION_RESULT.VALID;
     }
 }

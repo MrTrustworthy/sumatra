@@ -8,6 +8,8 @@ describe('Correct validation of MustContainConstraint', () => {
     ${[9, 2, 3, 4, 5, 6, 7, 8, 9]}  | ${[1, 2, 3, 4, 5, 6, 7, 8, 9]}    | ${EVALUATION_RESULT.INVALID}
     ${[1, 2, 3, 4]}                 | ${[1, 2, 3, 4]}                   | ${EVALUATION_RESULT.VALID}
     ${[3, 2, 3, 4]}                 | ${[1, 2, 3, 4]}                   | ${EVALUATION_RESULT.INVALID}
+    ${[1, 2, 3, 4]}                 | ${[5, 6, 7, 8]}                   | ${EVALUATION_RESULT.INVALID}
+    ${[5, 6, 7, 8]}                 | ${[1, 2, 3, 4]}                   | ${EVALUATION_RESULT.INVALID}        
     ${[1, 2, 3, 4, 5]}              | ${[1, 2, 3, 4, 5, 6, 7, 8, 9]}    | ${EVALUATION_RESULT.VALID}    
     ${[1, 2, 3, 4, 5]}              | ${[2, 3, 4, 5, 6]}                | ${EVALUATION_RESULT.INVALID}    
     ${[1, 2, 3, 4, 5, undefined]}   | ${[1, 2, 3, 4, 5, 6, 7, 8, 9]}    | ${EVALUATION_RESULT.VALID}
